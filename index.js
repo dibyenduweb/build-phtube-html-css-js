@@ -1,6 +1,11 @@
 // Global variable to keep track of the sorting order
 let shortByView = false;
 
+const toggleSort = () =>{
+    shortByView = !shortByView;
+    loadContent('1000')
+};
+
 // // Function to toggle the sorting order and reload content
 
 
@@ -30,7 +35,13 @@ const loadContent = async (categoryId) => {
     cardContain.innerHTML = '';
 
     // Sort by order 
-    
+    if(shortByView){
+        data.data.sort((a, b) => {
+        const viewsA = parseInt(a.others.views.replace('K','')) || 0 ;
+        const viewsB = parseInt(b.others.views.replace('K','')) || 0 ;
+        return viewsB -viewsA
+        });
+    }
   
 
     // Drowning card
